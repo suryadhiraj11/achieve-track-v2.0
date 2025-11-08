@@ -55,7 +55,24 @@ export default function Header() {
                   >
                     <Link to={`/profile/${currentUser.id}`} onClick={()=>setOpen(false)}>View Profile</Link>
                     <Link to="/explore" onClick={()=>setOpen(false)}>Explore</Link>
-                    <a href="#" onClick={(e)=>{ e.preventDefault(); setOpen(false); handleLogout(); }}>Logout</a>
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                        handleLogout();
+                      }}
+                      className="dropdown-btn"
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        width: "100%",
+                        textAlign: "left",
+                        padding: "10px 14px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Logout
+                    </button>
                   </motion.div>
                 )}
               </div>
