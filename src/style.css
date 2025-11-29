@@ -44,6 +44,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
 .nav-logo span {
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 .nav-links {
@@ -472,6 +474,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
   text-align: center;
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
   margin-bottom: 2rem;
 }
@@ -613,6 +617,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
   font-weight: 800;
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
   margin-bottom: 2rem;
 }
@@ -923,6 +929,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
   font-weight: 800;
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
   margin-bottom: 2rem;
 }
@@ -1182,6 +1190,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
   line-height: 1.2;
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
   margin-bottom: 1rem;
 }
@@ -1318,6 +1328,8 @@ html, body, #root { height: 100%; margin: 0; font-family: "Manrope", "Montserrat
   margin-bottom: 3rem;
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 
@@ -1540,6 +1552,8 @@ html, body {
   line-height: 1.2;
   background: linear-gradient(90deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 
@@ -1588,6 +1602,8 @@ html, body {
   margin-bottom: 1rem;
   background: linear-gradient(90deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 
@@ -1610,6 +1626,8 @@ html, body {
   font-weight: 800;
   background: linear-gradient(90deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 
@@ -1697,6 +1715,8 @@ html, body {
 .footer strong {
   background: linear-gradient(90deg, var(--purple), var(--pink));
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
   font-weight: 800;
 }
@@ -1759,6 +1779,8 @@ html, body {
 .gradient-text {
   background: linear-gradient(90deg, #7c3aed, #ec4899);
   -webkit-background-clip: text;
+background-clip: text;
+
   color: transparent;
 }
 

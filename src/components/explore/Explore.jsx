@@ -1,14 +1,37 @@
+// src/pages/Explore.jsx
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import AddAchievementForm from "../achievements/AddAchievementForm";
 import "../../style.css";
+import toast from "react-hot-toast";
 
 export default function Explore() {
-  const { feed, currentUser, toggleLike, addComment } = useAuth();
+  const {
+    feed,
+    currentUser,
+    toggleLike,
+    addComment,
+    removeAchievementFromUser,
+  } = useAuth();
+
   const [showForm, setShowForm] = useState(false);
   const [commentText, setCommentText] = useState({});
 
-  const publicFeed = feed.filter((post) => post.visibility === "public");
+  const publicFeed = Array.isArray(feed)
+    ? feed.filter((post) => post.visibility === "public")
+    : [];
+
+  const handleDelete = (post) => {
+    if (!currentUser) {
+      toast.error("You must be logged in to delete.");
+      return;
+    }
+    const ok = window.confirm("Delete this achievement? This cannot be undone.");
+    if (!ok) return;
+
+    removeAchievementFromUser(currentUser.id, post.id);
+    toast.success("Deleted");
+  };
 
   return (
     <section className="explore-section">
@@ -19,9 +42,9 @@ export default function Explore() {
           {currentUser && (
             <button
               className="btn-primary add-btn"
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => setShowForm((s) => !s)}
             >
-              {showForm ? "Close ✖" : "➕ Share Achievement"}
+              {showForm ? "Close ✖️" : "➕ Share Achievement"}
             </button>
           )}
         </div>
@@ -44,13 +67,17 @@ export default function Explore() {
             const isLiked = post.likes?.includes(currentUser?.id);
             const likeCount = post.likes?.length || 0;
 
+            const isOwner =
+              currentUser?.id === post.userId ||
+              currentUser?.achievements?.some((a) => a.id === post.id);
+
             return (
               <article key={post.id} className="post-card fade-up">
                 {/* Header */}
                 <div className="post-header">
                   <img
                     src={post.userAvatar}
-                    alt="user"
+                    alt={post.userName}
                     className="post-avatar"
                   />
                   <div>
@@ -68,6 +95,7 @@ export default function Explore() {
                     <img src={post.image} alt="post" />
                   </div>
                 )}
+
                 {post.pdf && (
                   <div className="post-media pdf-container">
                     <iframe
@@ -85,13 +113,33 @@ export default function Explore() {
                 </div>
 
                 {/* Actions */}
-                <div className="actions">
+                <div
+                  className="actions"
+                  style={{ display: "flex", gap: 8, alignItems: "center" }}
+                >
                   <button
                     className={`like-btn ${isLiked ? "liked" : ""}`}
-                    onClick={() => toggleLike(post.id, currentUser.id)}
+                    onClick={() => {
+                      if (!currentUser) {
+                        toast.error("Log in to like posts.");
+                        return;
+                      }
+                      toggleLike(post.id, currentUser.id);
+                    }}
                   >
                     ❤️ {likeCount}
                   </button>
+
+                  {isOwner && (
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(post)}
+                      style={{ marginLeft: 8 }}
+                      aria-label="Delete achievement"
+                    >
+                      🗑
+                    </button>
+                  )}
                 </div>
 
                 {/* Comments */}
@@ -110,6 +158,10 @@ export default function Explore() {
                     />
                     <button
                       onClick={() => {
+                        if (!currentUser) {
+                          toast.error("Log in to comment.");
+                          return;
+                        }
                         if (commentText[post.id]?.trim()) {
                           addComment(post.id, {
                             userName: currentUser.name,
